@@ -1,0 +1,316 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_app_user_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: client_status
+                  type: varchar(255)
+              - column:
+                  name: contact
+                  type: varchar(255)
+              - column:
+                  name: division
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uk_1j9d9a06i600gd43uu3km82jw
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: role
+                  type: varchar(255)
+              - column:
+                  name: profile_picture_id
+                  type: bigint
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uk_5g8dkekmt444o66c9ltie4jnd
+
+  - changeSet:
+      id: create_category_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: category
+                  type: varchar(255)
+              - column:
+                  name: sub_category
+                  type: varchar(255)
+
+  - changeSet:
+      id: create_message_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: message
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: button_text
+                  type: varchar(255)
+              - column:
+                  name: link
+                  type: varchar(255)
+              - column:
+                  name: text
+                  type: varchar(255)
+
+  - changeSet:
+      id: create_notification_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: notification
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: notification_time
+                  type: timestamp
+              - column:
+                  name: message_id
+                  type: bigint
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uk_message_id
+                    foreignKeyName: fk_notification_message_id
+                    references: message(id)
+              - column:
+                  name: receiver_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_notification_receiver_id
+                    references: app_user(id)
+
+  - changeSet:
+      id: create_payment_gateway_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: payment_gateway_req_param
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: currency
+                  type: varchar(255)
+              - column:
+                  name: cus_country
+                  type: varchar(255)
+              - column:
+                  name: emi_option
+                  type: varchar(255)
+              - column:
+                  name: num_of_item
+                  type: varchar(255)
+              - column:
+                  name: product_profile
+                  type: varchar(255)
+              - column:
+                  name: shipping_method
+                  type: varchar(255)
+
+  - changeSet:
+      id: create_product_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: final_buyer_id
+                  type: bigint
+              - column:
+                  name: is_approved_by_admin
+                  type: boolean
+              - column:
+                  name: is_bid_active
+                  type: boolean
+              - column:
+                  name: is_sold
+                  type: boolean
+              - column:
+                  name: is_visible
+                  type: boolean
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: product_time
+                  type: timestamp
+              - column:
+                  name: size
+                  type: varchar(255)
+              - column:
+                  name: starting_price
+                  type: double
+              - column:
+                  name: used_condition
+                  type: boolean
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_category_id
+                    references: category(id)
+              - column:
+                  name: seller_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_seller_id
+                    references: app_user(id)
+
+  - changeSet:
+      id: create_bid_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: bid
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: offered_price
+                  type: double
+              - column:
+                  name: buyer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bid_buyer_id
+                    references: app_user(id)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bid_product_id
+                    references: product(id)
+
+  - changeSet:
+      id: create_image_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: image
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: image_byte
+                  type: text
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(255)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_image_product_id
+                    references: product(id)
+
+  - changeSet:
+      id: add_profile_pic_foreign_key
+      author: rafsan
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: app_user
+            baseColumnNames: profile_picture_id
+            referencedTableName: image
+            referencedColumnNames: id
+            constraintName: fk_image_profile_picture_id
+
+  - changeSet:
+      id: create_transaction_table
+      author: rafsan
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: tran_id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: connection_status
+                  type: varchar(255)
+              - column:
+                  name: transaction_status
+                  type: varchar(255)
+              - column:
+                  name: app_user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_transaction_app_user_id
+                    references: app_user(id)
+              - column:
+                  name: payment_gateway_req_param_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_transaction_payment_gateway_req_param_id
+                    references: payment_gateway_req_param
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_transaction_product_id
+                    references: product

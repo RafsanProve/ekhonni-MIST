@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Insert data into the category table -->
+    <changeSet id="category_data-v1-01" author="rafsan">
+        <!-- Inserting data for each category and its sub-categories -->
+        <sql>DELETE FROM category;</sql> <!-- Delete existing data -->
+
+        <!-- Inserting data for Furniture category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (1, 'Furniture', 'Seating Furniture'),
+                                                                   (2, 'Furniture', 'Tables'),
+                                                                   (3, 'Furniture', 'Storage Furniture'),
+                                                                   (4, 'Furniture', 'Beds and Bedroom Furniture'),
+                                                                   (5, 'Furniture', 'Outdoor Furniture'),
+                                                                   (6, 'Furniture', 'Office Furniture'),
+                                                                   (7, 'Furniture', 'Entertainment Furniture');</sql>
+
+        <!-- Inserting data for Electronics category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (8, 'Electronics', 'Televisions'),
+                                                                   (9, 'Electronics', 'Computers &amp; Laptops'),
+                                                                   (10, 'Electronics', 'Smartphones &amp; Tablets'),
+                                                                   (11, 'Electronics', 'Audio Equipment'),
+                                                                   (12, 'Electronics', 'Cameras &amp; Photography'),
+                                                                   (13, 'Electronics', 'Home Appliances'),
+                                                                   (14, 'Electronics', 'Gaming Consoles &amp; Accessories'),
+                                                                   (15, 'Electronics', 'Wearable Technology'),
+                                                                   (16, 'Electronics', 'Networking &amp; Internet Devices'),
+                                                                   (17, 'Electronics', 'Electronic Accessories');</sql>
+
+        <!-- Inserting data for Vehicle category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (18, 'Vehicle', 'Cars &amp; Trucks'),
+                                                                   (19, 'Vehicle', 'Motorcycles &amp; Scooters'),
+                                                                   (20, 'Vehicle', 'RVs &amp; Campers'),
+                                                                   (21, 'Vehicle', 'Boats &amp; Watercraft'),
+                                                                   (22, 'Vehicle', 'Commercial Vehicles'),
+                                                                   (23, 'Vehicle', 'Trailers &amp; Hauling'),
+                                                                   (24, 'Vehicle', 'Powersports Vehicles'),
+                                                                   (25, 'Vehicle', 'Aircraft'),
+                                                                   (26, 'Vehicle', 'Bicycles &amp; Cycling'),
+                                                                   (27, 'Vehicle', 'Vehicle Parts &amp; Accessories');</sql>
+
+        <!-- Inserting data for Clothing category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (28, 'Clothing', 'Men''s Clothing'),
+                                                                   (29, 'Clothing', 'Women''s Clothing'),
+                                                                   (30, 'Clothing', 'Kids'' Clothing'),
+                                                                   (31, 'Clothing', 'Shoes'),
+                                                                   (32, 'Clothing', 'Accessories'),
+                                                                   (33, 'Clothing', 'Jewelry'),
+                                                                   (34, 'Clothing', 'Bags &amp; Luggage'),
+                                                                   (35, 'Clothing', 'Watches'),
+                                                                   (36, 'Clothing', 'Uniforms &amp; Workwear'),
+                                                                   (37, 'Clothing', 'Costumes &amp; Cosplay');</sql>
+
+        <!-- Inserting data for Sports Item category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (38, 'Sports Item', 'Exercise &amp; Fitness Equipment'),
+                                                                   (39, 'Sports Item', 'Team Sports Equipment'),
+                                                                   (40, 'Sports Item', 'Outdoor Recreation Gear'),
+                                                                   (41, 'Sports Item', 'Athletic Apparel &amp; Shoes'),
+                                                                   (42, 'Sports Item', 'Sports Accessories'),
+                                                                   (43, 'Sports Item', 'Cycling Equipment'),
+                                                                   (44, 'Sports Item', 'Water Sports Equipment'),
+                                                                   (45, 'Sports Item', 'Winter Sports Gear'),
+                                                                   (46, 'Sports Item', 'Hunting &amp; Fishing Gear'),
+                                                                   (47, 'Sports Item', 'Golf Equipment');</sql>
+
+        <!-- Inserting data for Properties category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (48, 'Properties', 'Residential Properties'),
+                                                                   (49, 'Properties', 'Commercial Properties'),
+                                                                   (50, 'Properties', 'Land &amp; Plots'),
+                                                                   (51, 'Properties', 'Vacation Rentals &amp; Timeshares'),
+                                                                   (52, 'Properties', 'Parking Spaces &amp; Garages'),
+                                                                   (53, 'Properties', 'Real Estate Services'),
+                                                                   (54, 'Properties', 'Shared Accommodations'),
+                                                                   (55, 'Properties', 'Agricultural Properties'),
+                                                                   (56, 'Properties', 'Industrial Properties'),
+                                                                   (57, 'Properties', 'Real Estate Investments');</sql>
+
+        <!-- Inserting data for Toy category -->
+        <sql>INSERT INTO category (id, category, sub_category) VALUES
+                                                                   (58, 'Toy', 'Action Figures &amp; Playsets'),
+                                                                   (59, 'Toy', 'Dolls &amp; Accessories'),
+                                                                   (60, 'Toy', 'Educational Toys'),
+                                                                   (61, 'Toy', 'Building Blocks &amp; Construction Sets'),
+                                                                   (62, 'Toy', 'Remote Control &amp; Vehicles'),
+                                                                   (63, 'Toy', 'Pretend Play &amp; Dress-Up'),
+                                                                   (64, 'Toy', 'Games &amp; Puzzles'),
+                                                                   (65, 'Toy', 'Outdoor Play Equipment'),
+                                                                   (66, 'Toy', 'Stuffed Animals &amp; Plush'),
+                                                                   (67, 'Toy', 'Arts &amp; Crafts')</sql>
+
+    </changeSet>
+
+
+</databaseChangeLog>

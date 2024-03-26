@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="payment_gateway_req_param-v1-01" author="nafees">
+        <insert tableName="payment_gateway_req_param">
+            <column  name="id"  valueNumeric="01"/>
+            <column name="currency" value="BDT"/>
+            <column name="emi_option" value="0"/>
+            <column name="shipping_method" value="NO"/>
+            <column name="product_profile" value="general"/>
+            <column name="cus_country" value="Bangladesh"/>
+            <column name="num_of_item" value="1"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
