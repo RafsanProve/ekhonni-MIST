@@ -11,6 +11,7 @@ import com.dsi.backend.repository.ImageModelRepository;
 import com.dsi.backend.repository.ProductRepository;
 import com.dsi.backend.service.ImageModelService;
 import com.dsi.backend.service.JwtTokenService;
+import com.dsi.backend.service.NotificationService;
 import com.dsi.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private JwtTokenService jwtTokenService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public ProductView saveProduct(Product product, MultipartFile[] file, String token) {
         product.setIsApprovedByAdmin(null);
@@ -86,6 +90,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         existingProduct.setIsApprovedByAdmin(isApprovedByAdmin);
         if(isApprovedByAdmin) existingProduct.setIsBidActive(true); //bid activates immediately after being accepted
+        notificationService.saveApproveByAdminNotification(existingProduct, isApprovedByAdmin);
         return productRepository.save(existingProduct);
     }
 

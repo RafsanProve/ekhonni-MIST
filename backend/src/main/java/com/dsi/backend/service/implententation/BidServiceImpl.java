@@ -8,9 +8,11 @@ import com.dsi.backend.repository.AppUserRepository;
 import com.dsi.backend.repository.BidRepository;
 import com.dsi.backend.repository.ProductRepository;
 import com.dsi.backend.service.BidService;
+import com.dsi.backend.service.NotificationService;
 import com.dsi.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,6 +31,9 @@ public class BidServiceImpl implements BidService{
 
     @Autowired
     private AppUserRepository appUserRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public Bid saveBid(Long id, String buyerEmail, Double offeredPrice) {
@@ -113,6 +118,7 @@ public class BidServiceImpl implements BidService{
 
         if (Objects.equals(product.getSeller().getEmail(), sellerEmail)){
             productRepository.updateFinalBuyerId(buyer.getId(), id);
+            notificationService.saveAcceptOrRevertBidNotification(buyer, product, false);
             return buyer;
         }
         return null;
@@ -123,6 +129,9 @@ public class BidServiceImpl implements BidService{
         Product product = productRepository.findProductById(id);
 
         if (Objects.equals(product.getSeller().getEmail(), sellerEmail)){
+            AppUser buyer = appUserRepository.findById(product.getFinalBuyerId())
+                    .orElseThrow(()->new UsernameNotFoundException("Buyer id does not exist"));
+            notificationService.saveAcceptOrRevertBidNotification(buyer, product, true);
             productRepository.revertFinalBuyerId(id);
             return true;
         }
