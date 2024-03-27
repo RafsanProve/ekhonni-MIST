@@ -13,10 +13,8 @@ import java.time.format.DateTimeFormatter;
 //@RequiredArgsConstructor
 @Entity
 public class Notification extends BaseEntity<Long>{
-//    @Column
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Message message;
+    private String text;
+    private String link;
     @ManyToOne
     @JoinColumn
     private AppUser receiver;

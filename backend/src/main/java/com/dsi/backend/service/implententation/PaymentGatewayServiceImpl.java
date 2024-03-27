@@ -7,10 +7,7 @@ import com.dsi.backend.model.*;
 import com.dsi.backend.projection.PaymentGatewayReqView;
 import com.dsi.backend.repository.PaymentGatewayReqParamRepository;
 import com.dsi.backend.repository.TransactionRepository;
-import com.dsi.backend.service.AppUserService;
-import com.dsi.backend.service.BidService;
-import com.dsi.backend.service.PaymentGatewayService;
-import com.dsi.backend.service.ProductService;
+import com.dsi.backend.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,8 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     private PaymentGatewayReqParamRepository paymentGatewayReqParamRepository;
     @Autowired
     private BidService bidService;
+    @Autowired
+    private NotificationService notificationService;
 
 
     @Autowired
@@ -59,7 +58,7 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
         transaction = transactionRepository.save(transaction);
 
         PaymentGatewayReqParam otherParams = paymentGatewayReqParamRepository.findById(1L)
-                        .orElseThrow(()->new ReqParamNotFoundException("Req param not found"));
+                .orElseThrow(()->new ReqParamNotFoundException("Req param not found"));
         transaction.setPaymentGatewayReqParam(otherParams);
         transaction.setProduct(product);
         transaction.setAppUser(appUser);
@@ -112,10 +111,9 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
         paymentGatewayMap.put("fail_url", failUrl);
 
 
-        String param =  paymentGatewayMap.keySet().stream()
+        return paymentGatewayMap.keySet().stream()
                 .map(key -> key + '=' + URLEncoder.encode(paymentGatewayMap.get(key), StandardCharsets.UTF_8))
                 .collect(Collectors.joining("&"));
-        return param;
     }
 
     @Override
@@ -140,6 +138,7 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
             Boolean status = bidService.changeIsSold(transaction.getProduct().getId(), appUser.getEmail());
 
             if(!status) throw new FinalBuyerNotFoundException("Final buyer id does not match or null");
+            notificationService.transactionNotification(appUser, transaction.getTran_id());
         }
         transactionRepository.save(transaction);
         return Map.of("transactionStatus",validateResp.getTransactionStatus());

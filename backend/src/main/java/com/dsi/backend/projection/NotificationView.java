@@ -1,10 +1,9 @@
 package com.dsi.backend.projection;
 
-import com.dsi.backend.model.Message;
-
 public interface NotificationView {
     Long getId();
-    Message getMessage();
+    String getText();
+    String getLink();
     AppUserView getReceiver();
     String getFormattedTime();
 
