@@ -1,6 +1,5 @@
 package com.dsi.backend.repository.implementation;
 
-import com.dsi.backend.model.Category;
 import com.dsi.backend.model.CategoryRecord;
 import com.dsi.backend.model.FilterRequest;
 import com.dsi.backend.model.Product;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.util.StringUtils;
 
@@ -39,8 +37,8 @@ public class CustomRepositoryImpl implements CustomRepository {
 
         if (f.categories() != null && !f.categories().isEmpty()) {
             for (CategoryRecord c : f.categories()) {
-                if (c.subcategories() != null && !c.subcategories().isEmpty()) {
-                    subCategoryNames.addAll(c.subcategories());
+                if (c.subCategories() != null && !c.subCategories().isEmpty()) {
+                    subCategoryNames.addAll(c.subCategories());
                 } else {
                     categoryNames.add(c.name());
                 }

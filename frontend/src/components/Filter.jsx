@@ -101,7 +101,7 @@ const Filter = ({ChangeHandle,FilterData,HandleCategory,HandleSubCategory,ResetF
                                     </div>
                                     {selectedCategory === index && (
                                         <ul className="">
-                                            {data.subcategories.map((subcategory, subIndex) => (
+                                            {data.subCategories.map((subcategory, subIndex) => (
                                                 <li key={subIndex} className="ml-10 text-gray-500 cursor-pointer"
                                                     onClick={() => {
                                                         HandleSubCategory(data.name, subcategory)
