@@ -127,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
     public Map<String,Long> countProducts(String division) {
         List<Product> product;
         if(Objects.equals(division, "")) {
-            product =productRepository.findByIsApprovedByAdminTrueAndIsSoldTrue();
+            product =productRepository.findByIsApprovedByAdminTrueAndIsSoldFalse();
         } else {
             product= productRepository.findByIsApprovedByAdminTrueAndIsSoldTrueAndSellerDivision(division);
         }

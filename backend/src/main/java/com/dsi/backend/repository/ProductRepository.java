@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long>, CustomRepository {
 
     List<Product> findByIsApprovedByAdminFalse();
-    List<Product> findByIsApprovedByAdminTrueAndIsSoldTrue();
+    List<Product> findByIsApprovedByAdminTrueAndIsSoldFalse();
     List<ProductView> getByIsApprovedByAdminTrue();
     List<ProductView> findByIsApprovedByAdminIsNullOrderByProductTimeAsc();
     Product findByNameAndDescriptionAndSize(String name, String description, String size);
