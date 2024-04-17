@@ -1,0 +1,68 @@
+id,category,sub_category
+1,Furniture,Seating Furniture
+2,Furniture,Tables
+3,Furniture,Storage Furniture
+4,Furniture,Beds and Bedroom Furniture
+5,Furniture,Outdoor Furniture
+6,Furniture,Office Furniture
+7,Furniture,Entertainment Furniture
+8,Electronics,Televisions
+9,Electronics,Computers & Laptops
+10,Electronics,Smartphones & Tablets
+11,Electronics,Audio Equipment
+12,Electronics,Cameras & Photography
+13,Electronics,Home Appliances
+14,Electronics,Gaming Consoles & Accessories
+15,Electronics,Wearable Technology
+16,Electronics,Networking & Internet Devices
+17,Electronics,Electronic Accessories
+18,Vehicle,Cars & Trucks
+19,Vehicle,Motorcycles & Scooters
+20,Vehicle,RVs & Campers
+21,Vehicle,Boats & Watercraft
+22,Vehicle,Commercial Vehicles
+23,Vehicle,Trailers & Hauling
+24,Vehicle,Powersports Vehicles
+25,Vehicle,Aircraft
+26,Vehicle,Bicycles & Cycling
+27,Vehicle,Vehicle Parts & Accessories
+28,Clothing,Men's Clothing
+29,Clothing,Women's Clothing
+30,Clothing,Kids' Clothing
+31,Clothing,Shoes
+32,Clothing,Accessories
+33,Clothing,Jewelry
+34,Clothing,Bags & Luggage
+35,Clothing,Watches
+36,Clothing,Uniforms & Workwear
+37,Clothing,Costumes & Cosplay
+38,Sports Item,Exercise & Fitness Equipment
+39,Sports Item,Team Sports Equipment
+40,Sports Item,Outdoor Recreation Gear
+41,Sports Item,Athletic Apparel & Shoes
+42,Sports Item,Sports Accessories
+43,Sports Item,Cycling Equipment
+44,Sports Item,Water Sports Equipment
+45,Sports Item,Winter Sports Gear
+46,Sports Item,Hunting & Fishing Gear
+47,Sports Item,Golf Equipment
+48,Properties,Residential Properties
+49,Properties,Commercial Properties
+50,Properties,Land & Plots
+51,Properties,Vacation Rentals & Timeshares
+52,Properties,Parking Spaces & Garages
+53,Properties,Real Estate Services
+54,Properties,Shared Accommodations
+55,Properties,Agricultural Properties
+56,Properties,Industrial Properties
+57,Properties,Real Estate Investments
+58,Toy,Action Figures & Playsets
+59,Toy,Dolls & Accessories
+60,Toy,Educational Toys
+61,Toy,Building Blocks & Construction Sets
+62,Toy,Remote Control & Vehicles
+63,Toy,Pretend Play & Dress-Up
+64,Toy,Games & Puzzles
+65,Toy,Outdoor Play Equipment
+66,Toy,Stuffed Animals & Plush
+67,Toy,Arts & Crafts

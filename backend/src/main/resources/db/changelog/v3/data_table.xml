@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="app_user-v3-01" author="rafsan">
+        <loadData tableName="app_user" file="db/changelog/v3/CSV/app_user.csv" separator=",">
+            <column name="id" header="id"/>
+            <column name="name" header="name"/>
+            <column name="address" header="address"/>
+            <column name="client_status" header="client_status"/>
+            <column name="contact" header="contact"/>
+            <column name="division" header="division"/>
+            <column name="email" header="email"/>
+            <column name="password" header="password"/>
+            <column name="role" header="role"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="category-v3-01" author="rafsan">
+        <loadData tableName="category" file="db/changelog/v3/CSV/category.csv" separator=",">
+            <column name="id" header="id"/>
+            <column name="category" header="category"/>
+            <column name="sub_category" header="sub_category"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="payment_gateway_req_param-v3-01" author="nafees">
+        <insert tableName="payment_gateway_req_param">
+            <column  name="id"  valueNumeric="01"/>
+            <column name="currency" value="BDT"/>
+            <column name="emi_option" value="0"/>
+            <column name="shipping_method" value="NO"/>
+            <column name="product_profile" value="general"/>
+            <column name="cus_country" value="Bangladesh"/>
+            <column name="num_of_item" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product-v3-01" author="rafsan">
+        <loadData tableName="product" file="db/changelog/v3/CSV/product.csv" separator=",">
+            <column name="id" header="id"/>
+            <column name="description" header="description"/>
+            <column name="is_approved_by_admin" header="is_approved_by_admin"/>
+            <column name="is_bid_active" header="is_bid_active"/>
+            <column name="is_sold" header="is_sold"/>
+            <column name="is_visible" header="is_visible"/>
+            <column name="name" header="name"/>
+            <column name="product_time" header="product_time"/>
+            <column name="size" header="size"/>
+            <column name="starting_price" header="starting_price"/>
+            <column name="used_condition" header="used_condition"/>
+            <column name="category_id" header="category_id"/>
+            <column name="seller_id" header="seller_id"/>
+            <column name="final_buyer_id" header="final_buyer_id"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="product_image-v3-01" author="rafsan">
+        <loadData tableName="image" file="db/changelog/v2/CSV/image.csv" separator=",">
+            <column name="id" header="id"/>
+            <column name="name" header="name"/>
+            <column name="type" header="type"/>
+            <column name="product_id" header="product_id"/>
+            <column name="image_byte" header="image_byte"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

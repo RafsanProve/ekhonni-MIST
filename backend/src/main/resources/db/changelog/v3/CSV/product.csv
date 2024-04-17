@@ -1,0 +1,5 @@
+id,description,final_buyer_id,is_approved_by_admin,is_bid_active,is_sold,is_visible,name,product_time,size,starting_price,used_condition,category_id,seller_id
+1,Perfect for corporate workspace.,,true,true,false,true,HP Laptop,2024-02-29 04:42:18.252051,16 x 12 inch,30000,false,9,1
+2,Recently bought.,,true,false,false,true,Iphone 14 Pro,2024-03-05 11:00:00.000000,6 x 3 inch,75000,true,10,2
+3,Still in one piece.,,true,true,false,true,Regal Sofa,2024-03-05 12:00:00.000000,48 x 16 inch,30000,true,1,3
+4,Feel the air.,,true,false,false,true,Royal Enfield,2024-03-05 13:00:00.000000,Enough,100000,true,19,1
