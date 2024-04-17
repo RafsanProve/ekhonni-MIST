@@ -23,8 +23,8 @@ const NotificationListModal = ({setModalOpen, notificationList}) => {
                     <ul id="notificationList"
                         className="bg-white list-none overflow-hidden hover:overflow-y-scroll border border-neutral-300 flex flex-col justify-start items-start rounded-lg shadow-md shadow-slate-400">
                         {notificationList.map((notification) => (
-                            <NotificationListItem key={notification.id} message={notification.message.text}
-                                                  link={notification.message.link}
+                            <NotificationListItem key={notification.id} message={notification.text}
+                                                  link={notification.link}
                                                   time={notification.formattedTime}/>
                         ))}
                     </ul>

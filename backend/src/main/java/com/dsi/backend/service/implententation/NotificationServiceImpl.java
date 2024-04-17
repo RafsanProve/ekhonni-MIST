@@ -1,12 +1,9 @@
 package com.dsi.backend.service.implententation;
 
 import com.dsi.backend.exception.NotificationNotFoundException;
-import com.dsi.backend.model.AppUser;
-import com.dsi.backend.model.Message;
-import com.dsi.backend.model.Notification;
+import com.dsi.backend.model.*;
 import com.dsi.backend.projection.NotificationView;
 import com.dsi.backend.repository.AppUserRepository;
-import com.dsi.backend.repository.MessageRepository;
 import com.dsi.backend.repository.NotificationRepository;
 import com.dsi.backend.service.JwtTokenService;
 import com.dsi.backend.service.NotificationService;
@@ -23,38 +20,71 @@ public class NotificationServiceImpl implements NotificationService {
     private NotificationRepository notificationRepository;
 
     @Autowired
-    private MessageRepository messageRepository;
-
-    @Autowired
     private AppUserRepository appUserRepository;
 
     @Autowired
     private JwtTokenService jwtTokenService;
 
     @Override
-    public NotificationView saveNotification(String token, Notification notification) {
-        Message message = notification.getMessage();
-        messageRepository.save(message);
-        AppUser receiver = appUserRepository.findByEmail(jwtTokenService.getUsernameFromToken(token.substring(7)));
+    public Notification saveNotification(Notification notification) {
+        return notificationRepository.save(notification);
+    }
+
+    @Override
+    public Notification saveApproveByAdminNotification(Product product, Boolean isApprovedByAdmin){
+        Notification notification = new Notification();
+        StringBuilder text = new StringBuilder("Your product " + product.getName());
+        if(isApprovedByAdmin){
+            text.append(" has been approved and up for bidding!");
+        } else{
+            text.append(" has been declined.");
+        }
+        notification.setText(text.toString());
+        notification.setLink("/product/"+product.getId());
+        notification.setReceiver(product.getSeller());
+        notification.setNotificationTime(LocalDateTime.now());
+        return this.saveNotification(notification);
+    }
+
+    @Override
+    public Notification saveAcceptOrRevertBidNotification(AppUser receiver, Product product, Boolean isReverted){
+        Notification notification = new Notification();
+        StringBuilder text = new StringBuilder(product.getSeller().getName()+" has ");
+        if(!isReverted){
+            text.append("accepted your offer for ");
+        } else{
+            text.append("retracted your offer to buy ");
+        }
+        text.append(product.getName());
+        notification.setText(text.toString());
+        notification.setLink("/product/"+product.getId());
         notification.setReceiver(receiver);
         notification.setNotificationTime(LocalDateTime.now());
-        Notification savedNotification = notificationRepository.save(notification);
-        return new SpelAwareProxyProjectionFactory().createProjection(NotificationView.class, savedNotification);
+        return this.saveNotification(notification);
+    }
+
+    @Override
+    public Notification transactionNotification(AppUser receiver, String tranId){
+        Notification notification = new Notification();
+        notification.setText("Your payment has been successful with transaction id "+tranId);
+        notification.setNotificationTime(LocalDateTime.now());
+        notification.setReceiver(receiver);
+        return this.saveNotification(notification);
     }
 
     @Override
     public List<NotificationView> fetchNotification(String token) {
         AppUser receiver = appUserRepository.findByEmail(jwtTokenService.getUsernameFromToken(token.substring(7)));
-        List<Notification> notifications = notificationRepository.findByReceiver(receiver);
+        List<Notification> notifications = notificationRepository.findByReceiverOrderByNotificationTimeDesc(receiver);
         return notifications.stream()
-                .map(notification -> new SpelAwareProxyProjectionFactory().createProjection(NotificationView.class,notification))
+                .map(this::convertToView)
                 .toList();
     }
 
     @Override
     public String clearAllNotification(String token) {
         AppUser receiver = appUserRepository.findByEmail(jwtTokenService.getUsernameFromToken(token.substring(7)));
-        List<Notification> notifications = notificationRepository.findByReceiver(receiver);
+        List<Notification> notifications = notificationRepository.findByReceiverOrderByNotificationTimeDesc(receiver);
         notificationRepository.deleteAll(notifications);
         return "All notifications cleared";
     }
@@ -66,6 +96,11 @@ public class NotificationServiceImpl implements NotificationService {
 
         notificationRepository.delete(notification);
         return "Notification cleared";
+    }
+
+    @Override
+    public NotificationView convertToView(Notification notification) {
+        return new SpelAwareProxyProjectionFactory().createProjection(NotificationView.class, notification);
     }
 
 

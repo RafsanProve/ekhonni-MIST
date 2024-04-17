@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class NotificationController {
     @Autowired
     NotificationService notificationService;
-    @PostMapping("/save")
-    public ResponseEntity<?> saveNotification(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @RequestBody Notification notification){
-
-        return ResponseEntity.ok(notificationService.saveNotification(token, notification));
-    }
 
     @GetMapping("/fetch")
     public ResponseEntity<?> fetchNotification(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
