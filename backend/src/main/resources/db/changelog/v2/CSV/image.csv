@@ -1,0 +1,5 @@
+id,name,type,product_id,image_byte
+1,enfield,image/jpeg,4,"txt/enfield.txt"
+2,hp,image/jpeg,1,"txt/hp.txt"
+3,iphone,image/jpeg,2,"txt/iphone.txt"
+4,regal,image/jpeg,3,"txt/regal.txt"
